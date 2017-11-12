@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 def read_corpora_file(file_name):
     df = pd.read_csv(file_name, sep='	', names=['ID', 'title', 'url', 'publisher',
                                                    'category', 'story', 'hostname', 'timestamp'])

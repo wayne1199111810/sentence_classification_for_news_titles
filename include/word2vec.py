@@ -5,7 +5,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
-from OneHotEncoder import OneHotEncoder
+from include.OneHotEncoder import OneHotEncoder
 
 import warnings
 warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')
