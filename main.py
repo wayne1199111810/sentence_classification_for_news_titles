@@ -3,10 +3,10 @@ from include import bag_of_word as BoW
 from include import word2vec as w2v
 from include.cnn import CNN
 
-pretrain_model = './data/GoogleNews-vectors-negative300.bin'
-BoW_dataset = './data/newsCorpora.shuffled.csv'
-w2v_train_data = './data/trainCorpora.csv'
-w2v_valid_data = './data/validCorpora.csv'
+pretrain_model = '../data/sentence_classification_for_news_titles/GoogleNews-vectors-negative300.bin'
+BoW_dataset = '../data/sentence_classification_for_news_titles/newsCorpora.shuffled.csv'
+w2v_train_data = '../data/sentence_classification_for_news_titles/trainCorpora.csv'
+w2v_valid_data = '../data/sentence_classification_for_news_titles/validCorpora.csv'
 BOW_CONFIG = './config/BoW.json'
 W2V_CONFIG = './config/w2v.json'
 
