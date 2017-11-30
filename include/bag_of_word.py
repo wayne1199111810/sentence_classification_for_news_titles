@@ -40,7 +40,7 @@ def vectorizeFeatures(vectorizer, raw_features, n_features, stop_words='english'
     features = features.reshape(features.shape[0], features.shape[1], 1)
     return features
 
-if __name__ == "__main__":
+def BOW(dataset=dataset):
     df = io_file.read_corpora_file(dataset)
 
     df_train, df_dev, df_test = io_file.split_train_dev_test(df)
@@ -79,3 +79,6 @@ if __name__ == "__main__":
 
         print("{1}: Training and predict using {0:2f} seconds".format(time.time() - start_time, clf_name))
         print("{0:3f}".format(accuracy))
+    
+if __name__ == "__main__":
+    BOW()

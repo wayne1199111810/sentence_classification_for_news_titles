@@ -101,9 +101,8 @@ def vectorizew2vFeatures(vectorizer, encoder, x, y, for_cnn):
         y = encoder.transform(y)
     return x, y
 
-def BOW():
-    # train_x, train_y, valid_x, valid_y = getBagOfWords(train_file, valid_file)
-    train_x, train_y, valid_x, valid_y = getBagOfWords('../data/sentence_classification_for_news_titles/newsCorpora.shuffled.csv')
+def BOW(train_file=train_file, valid_file=valid_file):
+    train_x, train_y, valid_x, valid_y = getBagOfWords(train_file, valid_file)
     run(train_x, train_y, valid_x, valid_y)
 
 def W2V():
