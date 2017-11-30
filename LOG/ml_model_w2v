@@ -1,0 +1,6 @@
+{
+'data':'Api_news',
+'representation': 'w2v',
+'Logistic Regression accuracy': 0.411486,
+'linear SVM accuracy': 0.410980,
+}

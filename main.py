@@ -2,6 +2,7 @@ import json, sys
 from include import bag_of_word as BoW
 from include import word2vec as w2v
 from include.cnn import CNN
+from include import getApiData as api
 
 pretrain_model = '../data/sentence_classification_for_news_titles/GoogleNews-vectors-negative300.bin'
 BoW_dataset = '../data/sentence_classification_for_news_titles/newsCorpora.shuffled.csv'
@@ -9,6 +10,9 @@ w2v_train_data = '../data/sentence_classification_for_news_titles/trainCorpora.c
 w2v_valid_data = '../data/sentence_classification_for_news_titles/validCorpora.csv'
 BOW_CONFIG = './config/BoW.json'
 W2V_CONFIG = './config/w2v.json'
+
+train_file = '../data/sentence_classification_for_news_titles/api_data/corpora/trainCorpora.csv'
+valid_file = '../data/sentence_classification_for_news_titles/api_data/corpora/validCorpora.csv'
 
 def preprocessing_pad(x, maxlen):
     x = sequence.pad_sequences(x, maxlen=maxlen)
@@ -20,10 +24,12 @@ def run(sentence_representation, model_filename, LOG):
 
 def getDatasetFromSentRepresentation(sentence_representation):
     if sentence_representation.lower() == 'bow':
-        train_x, train_y, test_x, test_y = BoW.getBagOfWords(BoW_dataset)
+        # train_x, train_y, test_x, test_y = BoW.getBagOfWords(BoW_dataset)
+        train_x, train_y, test_x, test_y = api.getBagOfWords(train_file, valid_file, True)
         config_file = BOW_CONFIG
     elif sentence_representation.lower() == 'w2v':
-        train_x, train_y, test_x, test_y = w2v.getWord2Vec(w2v_train_data, w2v_valid_data, pretrain_model)
+        # train_x, train_y, test_x, test_y = w2v.getWord2Vec(w2v_train_data, w2v_valid_data, pretrain_model)
+        train_x, train_y, test_x, test_y = api.getWord2Vec(train_file, valid_file, pretrain_model, True)
         config_file = W2V_CONFIG
     return (train_x, train_y), (test_x, test_y), config_file
 

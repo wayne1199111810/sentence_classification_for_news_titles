@@ -1,4 +1,5 @@
 {
+	"data": 'News Aggregator Data Set',
 	"model_type": "CNN-static",
 	"dropout_p":0.5,
 	"windows": [3, 4, 5, 6],

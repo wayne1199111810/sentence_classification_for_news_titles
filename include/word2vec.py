@@ -17,7 +17,7 @@ label_encodings = {
     'm': 3
 };
 
-pretrain_model = '../data/GoogleNews-vectors-negative300.bin'
+pretrain_model = '../data/sentence_classification_for_news_titles/GoogleNews-vectors-negative300.bin'
 
 class MeanEmbeddingVectorizer(object):
     def __init__(self, w2v):

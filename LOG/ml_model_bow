@@ -1,0 +1,6 @@
+{
+'data':'Api_news',
+'representation': 'BOW',
+'Logistic Regression accuracy': 0.353294,
+'linear SVM accuracy': 0.348733,
+}
