@@ -12,7 +12,7 @@ def read_config(file_name):
 
 if __name__ == "__main__":
     data_dir = "download_data/"
-    config = read_config('./config/news_api.json')
+    config = read_config('./config/eventRegistry_key.json')
 
     er = EventRegistry(apiKey=config["apiKey"])
 
