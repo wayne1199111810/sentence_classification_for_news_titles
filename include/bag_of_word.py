@@ -6,11 +6,15 @@ from sklearn import preprocessing
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC, LinearSVC
 import time
-from include import io_file
-from include.OneHotEncoder import OneHotEncoder
+# from include import io_file
+# from include.OneHotEncoder import OneHotEncoder
+
+from OneHotEncoder import OneHotEncoder
+import io_file
+
 
 label_dic = ['e','t','b','m']
-dataset = "../data/newsCorpora.shuffled.csv"
+dataset = "../data/sentence_classification_for_news_titles/newsCorpora.shuffled.csv"
 
 def getBagOfWords(filename, n_features=1000, train_all=True, num_of_instance=100, label_dic=label_dic):
     data_train, data_test, y_train, y_test = splitData2TrainAndTest(filename, train_all, num_of_instance)
@@ -54,7 +58,7 @@ def BOW(dataset=dataset):
     data_test = df_dev.loc[:, "title"]
     y_test = df_dev.loc[:, "category"]
 
-    vectorizer = HashingVectorizer(stop_words='english')
+    vectorizer = HashingVectorizer(stop_words='english', n_features=1000)
     x_train = vectorizer.transform(data_train)
 
     # build and train
@@ -79,6 +83,26 @@ def BOW(dataset=dataset):
 
         print("{1}: Training and predict using {0:2f} seconds".format(time.time() - start_time, clf_name))
         print("{0:3f}".format(accuracy))
-    
+
+def getUciData(dataset):
+    df = io_file.read_corpora_file(dataset)
+
+    df_train, df_dev, df_test = io_file.split_train_dev_test(df)
+    train_all = True
+    if train_all:
+        data_train = df_train.loc[:, "title"]
+        y_train = df_train.loc[0:, "category"]
+    else:
+        data_train = df_train.loc[:2000, "title"]
+        y_train = df_train.loc[0:2000, "category"]
+    data_test = df_dev.loc[:, "title"]
+    y_test = df_dev.loc[:, "category"]
+
+    vectorizer = HashingVectorizer(stop_words='english')
+    x_train = vectorizer.transform(data_train)
+    x_test = vectorizer.transform(data_test)
+
+    return x_train, y_train, x_test, y_test
+
 if __name__ == "__main__":
     BOW()

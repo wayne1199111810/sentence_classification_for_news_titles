@@ -5,7 +5,7 @@
 	"num_of_filters": 10,
 	"sequence_length":100,
 	"dim":1000,
-	"output_size":12,
+	"output_size":4,
 	"batch_size":32,
 	"epochs":10
 }

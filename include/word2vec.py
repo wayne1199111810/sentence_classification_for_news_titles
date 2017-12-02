@@ -73,22 +73,23 @@ def train_svm(word2vector, trainX, trainY, valX, valY):
     print('SVM Training Accuracy:', svc.score(trainX, trainY))
     print('SVM Validation Accuracy:', svc.score(valX, valY))
 
-def vectorizeFeatures(vectorizer, encoder, x, y):
+def vectorizeFeatures(vectorizer, encoder, x, y, for_cnn):
     x = vectorizer.transform(x)
-    x = x.reshape(x.shape[0], x.shape[1], 1)
-    y = encoder.transform(y)
+    if for_cnn:
+        x = x.reshape(x.shape[0], x.shape[1], 1)
+        y = encoder.transform(y)
     return x, y
 
-def getWord2Vec(train_file, val_file, pretrain_model):
+def getWord2Vec(train_file, val_file, pretrain_model, for_cnn=False):
     word2vector = build_word2vector(pretrain_model)
     vectorizer = MeanEmbeddingVectorizer(word2vector)
     encoder = OneHotEncoder(list(label_encodings.values()))
     print('word2vector built')
     trainX, trainY = build_data(train_file)
-    trainX, trainY = vectorizeFeatures(vectorizer, encoder, trainX, trainY)
+    trainX, trainY = vectorizeFeatures(vectorizer, encoder, trainX, trainY, for_cnn)
     print('training data built')
     valX, valY = build_data(val_file)
-    valX, valY = vectorizeFeatures(vectorizer, encoder, valX, valY)
+    valX, valY = vectorizeFeatures(vectorizer, encoder, valX, valY, for_cnn)
     print('validation data built')
     return trainX, trainY, valX, valY
 
