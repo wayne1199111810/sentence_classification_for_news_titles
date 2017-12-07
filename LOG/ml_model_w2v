@@ -3,4 +3,12 @@
 'representation': 'w2v',
 'Logistic Regression accuracy': 0.411486,
 'linear SVM accuracy': 0.410980,
+'number of category': 13
+}
+
+{
+'data':'UCI',
+'representation': 'w2v',
+'Logistic Regression accuracy': ,
+'linear SVM accuracy':
 }

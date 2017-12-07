@@ -1,9 +1,12 @@
 import json
 from keras.models import Sequential, Model
-from keras.layers import Dense, Dropout, Flatten, Input, MaxPooling1D, Convolution1D, Embedding
+from keras.layers import Dense, Dropout, Flatten, Input, MaxPooling1D, Convolution1D
 from keras.layers.merge import Concatenate
 from keras.preprocessing import sequence
 from keras.utils import plot_model
+
+from sklearn.metrics import precision_score, recall_score, f1_score
+
 
 class CNN:
     def __init__(self, config_file):
@@ -20,6 +23,7 @@ class CNN:
             # self.input_size = (para['sequence_length'], para['w2v_dim'])
             self.input_size = (para['dim'], 1)
             self.output_size = para['output_size']
+            self.max_len = para['max_len']
 
     def constructNN(self):
         model_input = Input(shape=self.input_size)
@@ -30,7 +34,7 @@ class CNN:
                 padding="valid",
                 activation="relu",
                 strides=1)(model_input)
-            max_pool = MaxPooling1D(pool_size=2)(conv)
+            max_pool = MaxPooling1D(pool_size=self.max_len)(conv)
             max_pool = Flatten()(max_pool)
             convs.append(max_pool)
         merged = Concatenate()(convs) if len(convs) > 1 else convs[0]
@@ -65,4 +69,5 @@ class CNN:
         loss, acc = self.model.evaluate(test_x, test_y)
         s = '\nTesting loss: {}, acc: {}\n'.format(loss, acc)
         print(s)
-        return s
+        pred_y = self.model.predict(test_x)
+        return s, pred_y

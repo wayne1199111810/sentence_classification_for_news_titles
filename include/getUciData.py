@@ -15,8 +15,20 @@ label_encodings = {
 };
 label_dic = ['e','t','b','m']
 
+def countToken(train_x):
+    count = 0
+    vocab = set()
+    for sent in train_x:
+        count += len(train_x)
+        for w in sent:
+            vocab.add(w)
+    print('vocab: ' + str(len(vocab)))
+    print('tokens: ' + str(count))
+    print('utterances: ' + str(len(train_x)))
+
 def getBowUciData(filename, for_cnn=False, n_features=1000, label_dic=label_dic):
     train_x, train_y, test_x, test_y = splitData2TrainAndTest(filename)
+
     encoder = OneHotEncoder(label_dic)
     if for_cnn:
         vectorizer = HashingVectorizer(stop_words='english', n_features=n_features)
@@ -37,7 +49,21 @@ def splitData2TrainAndTest(filename):
 
 def vectorizeFeatures(vectorizer, encoder, x, y, for_cnn):
     x = vectorizer.transform(x)
-    x = x.toarray() if type(x) != type(np.array([])) else x
+    # x = x.toarray() if type(x) != type(np.array([])) else x
+    if for_cnn:
+        x = x.reshape(x.shape[0], x.shape[1], 1)
+        y = encoder.transform(y)
+    return x, y
+
+def vectorizeBowFeatures(vectorizer, encoder, x, y, for_cnn):
+    x = vectorizer.transform(x).toarray()
+    if for_cnn:
+        x = x.reshape(x.shape[0], x.shape[1], 1)
+        y = encoder.transform(y)
+    return x, y
+
+def vectorizew2vFeatures(vectorizer, encoder, x, y, for_cnn):
+    x = vectorizer.transform(x)
     if for_cnn:
         x = x.reshape(x.shape[0], x.shape[1], 1)
         y = encoder.transform(y)
@@ -45,11 +71,15 @@ def vectorizeFeatures(vectorizer, encoder, x, y, for_cnn):
 
 ##########################################################################
 def getW2vUciData(train_file, val_file, pretrain_model, for_cnn=False):
+    train_x, train_y = build_data(train_file)
+    countToken(train_x)
+
     word2vector = build_word2vector(pretrain_model)
     vectorizer = MeanEmbeddingVectorizer(word2vector)
     encoder = OneHotEncoder(list(label_encodings.values()))
     print('word2vector built')
     train_x, train_y = build_data(train_file)
+
     train_x, train_y = vectorizeFeatures(vectorizer, encoder, train_x, train_y, for_cnn)
     print('training data built')
     valid_x, valid_y = build_data(val_file)

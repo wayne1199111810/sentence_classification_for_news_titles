@@ -2,5 +2,13 @@
 'data':'Api_news',
 'representation': 'BOW',
 'Logistic Regression accuracy': 0.353294,
-'linear SVM accuracy': 0.348733,
+'linear SVM accuracy': 0.348733
+'number of category': 13
+}
+
+{
+	'data':'uci',
+	'representation': 'BOW',
+	'Logistic Regression accuracy': 85.03,
+	'linear SVM accuracy': ,
 }

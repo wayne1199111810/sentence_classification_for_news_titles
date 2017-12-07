@@ -1,0 +1,11 @@
+{
+	"model_type": "CNN-static",
+	"dropout_p":0.5,
+	"windows": [3, 4, 5, 6],
+	"num_of_filters": 10,
+	"sequence_length":100,
+	"dim":1000,
+	"output_size":4,
+	"batch_size":32,
+	"epochs":10
+}
