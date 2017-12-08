@@ -20,10 +20,12 @@ event_valid_file = '../data/sentence_classification_for_news_titles/api_data/cor
 
 event_category = set(['Business', 'Games', 'Health', 'Science'])
 a3_category = set(['business', 'sport', 'entertainment', 'sci_tech', 'health'])
+uci_category = set(['e', 'b', 't', 'm'])
 
 dataset2category = {
     'a3': a3_category,
-    'event': event_category
+    'event': event_category,
+    'uci': uci_category
 }
 
 def runApi(train_file, test_file, pretrain_model):

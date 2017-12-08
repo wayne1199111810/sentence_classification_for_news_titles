@@ -18,10 +18,12 @@ event_valid_file = '../data/sentence_classification_for_news_titles/api_data/cor
 
 event_category = set(['Business', 'Games', 'Health', 'Science'])
 a3_category = set(['business', 'sport', 'entertainment', 'sci_tech', 'health'])
+uci_category = set(['e', 'b', 't', 'm'])
 
 dataset2category = {
     'a3': a3_category,
-    'event': event_category
+    'event': event_category,
+    'uci': uci_category
 }
 
 def runApi(train_file, valid_file):
@@ -50,7 +52,6 @@ def trainBOW(train_x, train_y, test_x, test_y):
         # test
         pred_y = clf.predict(test_x)
         accuracy = np.sum(pred_y == test_y) / len(test_y)
-
         print("{1}: Training and predict using {0:2f} seconds".format(time.time() - start_time, clf_name))
         print("{0:3f}".format(accuracy))
         print("\tPrecision: %1.3f" % precision_score(test_y, pred_y, average='weighted'))

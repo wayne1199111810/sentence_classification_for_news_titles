@@ -10,10 +10,12 @@ UCI_w2v_valid_data = '../data/sentence_classification_for_news_titles/validCorpo
 
 event_category = set(['Business', 'Games', 'Health', 'Science'])
 a3_category = set(['business', 'sport', 'entertainment', 'sci_tech', 'health'])
+uci_category = set(['e', 'b', 't', 'm'])
 
 dataset2category = {
     'a3': a3_category,
-    'event': event_category
+    'event': event_category,
+    'uci': uci_category
 }
 
 def runApi(train_file, valid_file, config_file, sent_repres, LOG, model_filename):
