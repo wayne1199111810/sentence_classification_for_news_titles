@@ -41,7 +41,7 @@ def runUCI(train_file, test_file, pretrain_model):
     del train_x, train_y, test_x, test_y
 
 def trainW2v(train_x, train_y, test_x, test_y):
-    train_logistic(train_x, train_y, test_x, test_y)
+    # train_logistic(train_x, train_y, test_x, test_y)
     train_svm(train_x, train_y, test_x, test_y)
 
 def train_logistic(train_x, train_y, test_x, test_y):

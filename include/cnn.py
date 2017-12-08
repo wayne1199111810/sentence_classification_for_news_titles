@@ -4,84 +4,11 @@ from keras.layers import Dense, Dropout, Flatten, Input, MaxPooling1D, Convoluti
 from keras.layers.merge import Concatenate
 from keras.preprocessing import sequence
 from keras.utils import plot_model
+from keras.models import load_model
+
 from sklearn.metrics import precision_score, recall_score, f1_score
 
-from keras import backend as K
-
- def mcor(y_true, y_pred):
-     #matthews_correlation
-    y_pred_pos = K.round(K.clip(y_pred, 0, 1))
-    y_pred_neg = 1 - y_pred_pos
-
-    y_pos = K.round(K.clip(y_true, 0, 1))
-    y_neg = 1 - y_pos
-
-    tp = K.sum(y_pos * y_pred_pos)
-    tn = K.sum(y_neg * y_pred_neg)
-
-    fp = K.sum(y_neg * y_pred_pos)
-    fn = K.sum(y_pos * y_pred_neg)
-
-    numerator = (tp * tn - fp * fn)
-    denominator = K.sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
-
-    return numerator / (denominator + K.epsilon())
-
-def precision(y_true, y_pred):
-    """Precision metric.
-
-    Only computes a batch-wise average of precision.
-
-    Computes the precision, a metric for multi-label classification of
-    how many selected items are relevant.
-    """
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    precision = true_positives / (predicted_positives + K.epsilon())
-    return precision
-
-def recall(y_true, y_pred):
-    """Recall metric.
-
-    Only computes a batch-wise average of recall.
-
-    Computes the recall, a metric for multi-label classification of
-    how many relevant items are selected.
-    """
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-    recall = true_positives / (possible_positives + K.epsilon())
-    return recall
-
-def f1(y_true, y_pred):
-    def recall(y_true, y_pred):
-        """Recall metric.
-
-        Only computes a batch-wise average of recall.
-
-        Computes the recall, a metric for multi-label classification of
-        how many relevant items are selected.
-        """
-        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-        possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
-        recall = true_positives / (possible_positives + K.epsilon())
-        return recall
-
-    def precision(y_true, y_pred):
-        """Precision metric.
-
-        Only computes a batch-wise average of precision.
-
-        Computes the precision, a metric for multi-label classification of
-        how many selected items are relevant.
-        """
-        true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-        predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
-        precision = true_positives / (predicted_positives + K.epsilon())
-        return precision
-    precision = precision(y_true, y_pred)
-    recall = recall(y_true, y_pred)
-    return 2*((precision*recall)/(precision+recall))
+import numpy as np
 
 class CNN:
     def __init__(self, config_file):
@@ -120,7 +47,7 @@ class CNN:
         model_ouput = Dense(self.output_size, activation="softmax")(dropout)
 
         self.model = Model(model_input, model_ouput)
-        self.model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy", recall, precision, f1])
+        self.model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
     def plot_model(self, filename):
         plot_model(self.model, to_file=filename)
@@ -147,4 +74,23 @@ class CNN:
         s = '\nTesting loss: {}, acc: {}\n'.format(loss, acc)
         print(s)
         pred_y = self.model.predict(test_x)
+        self.printMetric(pred_y, test_y)
         return s, pred_y
+
+    def loadModel(self, path):
+        self.model = load_model(path)
+
+    def printMetric(self, pred_y, test_y):
+        int_test_y = getIntFormat(test_y)
+        int_pred_y = getIntFormat(pred_y)
+
+        print("\tPrecision: %1.3f" % precision_score(int_test_y, int_pred_y, average='weighted'))
+        print("\tRecall: %1.3f" % recall_score(int_test_y, int_pred_y, average='weighted'))
+        print("\tF1: %1.3f\n" % f1_score(int_test_y, int_pred_y, average='weighted'))
+
+def getIntFormat(float_y):
+    int_y = np.zeros(float_y.shape)
+    idx =  np.argmax(float_y, axis=1)
+    for i in range(int_y.shape[0]):
+        int_y[i][idx[i]] = 1
+    return int_y
