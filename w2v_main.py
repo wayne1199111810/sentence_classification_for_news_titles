@@ -41,7 +41,7 @@ def runUCI(train_file, test_file, pretrain_model):
     del train_x, train_y, test_x, test_y
 
 def trainW2v(train_x, train_y, test_x, test_y):
-    # train_logistic(train_x, train_y, test_x, test_y)
+    train_logistic(train_x, train_y, test_x, test_y)
     train_svm(train_x, train_y, test_x, test_y)
 
 def train_logistic(train_x, train_y, test_x, test_y):
@@ -61,14 +61,14 @@ def train_logistic(train_x, train_y, test_x, test_y):
 def train_svm(train_x, train_y, test_x, test_y):
     svc = Pipeline([("linear svc", SVC(kernel="linear"))])
     svc.fit(train_x, train_y)
-    pred_y = lr.predict(test_x)
+    pred_y = svc.predict(test_x)
     print('SVM trained')
     print('SVM Training Accuracy:', svc.score(train_x, train_y))
     print('SVM Validation Accuracy:', svc.score(test_x, test_y))
     print("\tPrecision: %1.3f" % precision_score(test_y, pred_y, average='weighted'))
     print("\tRecall: %1.3f" % recall_score(test_y, pred_y, average='weighted'))
     print("\tF1: %1.3f\n" % f1_score(test_y, pred_y, average='weighted'))
-    print(lr.classes_)
+    print(svc.classes_)
     # T = svc.predict_proba(test_x)
     # writeWrong(svc.predict(test_x), test_y, T, 'wrong_w2v_svm')
 
