@@ -8,5 +8,8 @@
 	"output_size":5,
 	"batch_size":32,
 	"epochs":10,
-	"max_sent_len": 1000
+	"max_sent_len": 1000,
+	"category": ["business", "sport", "entertainment", "sci_tech", "health"],
+	"output_model_name": "model/bow_a3.h5",
+	"LOG": "LOG/cnn_bow_a3"
 }

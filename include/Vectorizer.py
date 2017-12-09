@@ -1,4 +1,4 @@
-import numpy as py
+import numpy as np
 
 class MeanEmbeddingVectorizer(object):
     def __init__(self, w2v):

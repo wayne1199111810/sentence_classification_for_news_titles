@@ -8,5 +8,8 @@
 	"output_size":4,
 	"batch_size":32,
 	"epochs":10,
-	"max_sent_len": 1000
+	"max_sent_len": 1000,
+	"category": ["e", "b", "t", "m"],
+	"output_model_name": "model/bow_uci.h5",
+	"LOG": "LOG/cnn_bow_uci"
 }
