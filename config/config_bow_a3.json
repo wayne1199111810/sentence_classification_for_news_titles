@@ -11,5 +11,5 @@
 	"max_sent_len": 1000,
 	"category": ["business", "sport", "entertainment", "sci_tech", "health"],
 	"output_model_name": "model/bow_a3.h5",
-	"LOG": "LOG/cnn_bow_a3"
+	"log_file": "LOG/cnn_bow_a3"
 }

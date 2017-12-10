@@ -1,3 +1,41 @@
+# //////////////////////////////Functions//////////////////////////////
+#
+# printDatasetInfo()
+#
+# Print the number of unique vocabularies in the dataset, number of words in
+# the dataset, and the number of news title in the dataset
+#
+#
+# build_data()
+#
+# Given the dataset with the first word as the label, and the remaining words as
+# the news title. Since we only consider the result for the given category, we
+# skip the instances which are not in the category
+#
+# //////////////////////////////BowDataProvider//////////////////////////////
+#
+# vectorizeBowFeatures()
+#
+# Since cnn takes 1*(# of categories) vector as the label, we use one hot as the
+# encoding for the categories. Furthermore, cnn takes 3-D array as input, we
+# reshape the bow words to 3-D array.
+#
+# //////////////////////////////W2vDataProvider//////////////////////////////
+#
+# build_word2vector()
+#
+# We use google's pretrain w2v model as our word embedding
+#
+#
+# vectorizew2vFeatures()
+#
+# Since cnn takes 1*(# of categories) vector as the label, we use one hot as the
+# encoding for the categories. Furthermore, cnn takes 3-D array as input, we
+# reshape the bow words to 3-D array. In order to have a fix size input for CNN,
+# we take the maximum sentence length from the dataset and pad zeros to the
+# sentences whose length are shorter than maximum length
+#
+
 import warnings
 warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')
 
@@ -6,6 +44,7 @@ import numpy as np
 from sklearn.feature_extraction.text import HashingVectorizer
 from include.OneHotEncoder import OneHotEncoder
 from include.Vectorizer import MeanEmbeddingVectorizer, EmbeddingVectorizer
+
 
 def printDatasetInfo(features):
     count = 0
@@ -62,14 +101,14 @@ class W2vDataProvider(object):
         self.for_cnn = for_cnn
         self.max_len = max_len
         self.encoder = OneHotEncoder(list(category))
-        self.build_word2vector(pretrain_model)
-        self.vectorizer = EmbeddingVectorizer(self.word2vector) if for_cnn else MeanEmbeddingVectorizer(self.word2vector)
+        word2vector = self.build_word2vector(pretrain_model)
+        self.vectorizer = EmbeddingVectorizer(word2vector) if for_cnn else MeanEmbeddingVectorizer(word2vector)
         print('word2vector built')
 
     def build_word2vector(self, pretrain_model):
         model = gensim.models.KeyedVectors.load_word2vec_format(pretrain_model, binary=True)
         print('word2vector loaded')
-        self.word2vector = dict(zip(model.wv.index2word, model.wv.syn0))
+        return dict(zip(model.wv.index2word, model.wv.syn0))
 
     def getData(self, filename):
         x, y = build_data(filename, self.category)

@@ -11,5 +11,5 @@
 	"max_sent_len": 1000,
 	"category": ["e", "b", "t", "m"],
 	"output_model_name": "model/bow_uci.h5",
-	"LOG": "LOG/cnn_bow_uci"
+	"log_file": "LOG/cnn_bow_uci"
 }

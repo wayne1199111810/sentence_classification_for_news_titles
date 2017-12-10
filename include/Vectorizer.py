@@ -1,3 +1,19 @@
+# ///////////////////////////MeanEmbeddingVectorizer///////////////////////////
+#
+# transform()
+#
+# Using google's w2v, we take the mean of all the word vectors in each sentence
+# as the sentence representation for the logistic regression and SVM.
+# Return a 2-D array.
+#
+# /////////////////////////////EmbeddingVectorizer/////////////////////////////
+#
+# transform()
+#
+# Using google's w2v, we concatenate the word vectors to the input features.
+# Return a 3-D array
+#
+
 import numpy as np
 
 class MeanEmbeddingVectorizer(object):

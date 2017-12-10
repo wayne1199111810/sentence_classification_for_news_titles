@@ -11,5 +11,5 @@
 	"max_sent_len": 1000,
 	"category": ["Business", "Games", "Health", "Science"],
 	"output_model_name": "model/bow_event.h5",
-	"LOG": "LOG/cnn_bow_event"
+	"log_file": "LOG/cnn_bow_event"
 }

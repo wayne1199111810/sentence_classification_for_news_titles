@@ -2,7 +2,7 @@
 	"model_type": "CNN-static",
 	"dropout_p":0.6,
 	"windows": [3, 4, 5, 6],
-	"num_of_filters": 10,
+	"num_of_filters": 20,
 	"sequence_length":100,
 	"dim":300,
 	"output_size":4,
@@ -11,5 +11,5 @@
 	"max_sent_len": 50,
 	"category": ["Business", "Games", "Health", "Science"],
 	"output_model_name": "model/w2v_event.h5",
-	"LOG": "LOG/cnn_w2v_event"
+	"log_file": "LOG/cnn_w2v_event"
 }
