@@ -5,6 +5,7 @@
 **[Dataset](#dataset)**<br>
 **[Pre-request](#dependency)**<br>
 **[Training Example](#implementation)**<br>
+**[Github](https://github.com/wayne1199111810/sentence_classification_for_news_titles)**<br>
 
 ## Project Description
 Classifying the semantic content is one of the critical problems in natural language processing. There are many cases where only a small number of words are provided to interpret the meaning or intent such as keyword searches. However, the performance of short text classification is limited due to shortness of sentences, which causes sparse vector representations if we use word occurrence to represent sentences, and lack of context. On the other hand, news titles, though consisting of short sentences, provide rich information of the semantic content in a concise way. Because of this property, we believe that news title classification will be a good start point for our sentence classification task.
@@ -20,33 +21,25 @@ It is collected from Event Registry API, in which contains much more up-to-date 
 TagMyNews Datasets is a collection of datasets of short text fragments which are used for topic-based text classifier. It is used in several other papers and is more difficult than the News Aggregator Dataset considering the scarcity of data and more categories.
 
 ## Dependency
-### Download w2v from google
-Download [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
-Reference to [Google word2vec](https://code.google.com/archive/p/word2vec/)
-
-### Install Keras
-Reference to [Keras](https://keras.io/)
-```
-pip install keras
-```
+The word embedding [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit) from [Google word2vec](https://code.google.com/archive/p/word2vec/). The [Keras](https://keras.io/) Deep Learning library and most recent [Theano](http://deeplearning.net/software/theano/install.html#install) backend should be installed. You can use pip for that.
 
 ## Implementation
 ### Machine Learning Model on Different Sentence Representation
 Training count of words on SVM and logistic regression
 ```
-python bow_main.py (bow config file) (training data) (testing data)
+python bow_main.py (bow_config_file) (train_data) (test_data)
 ```
 Training w2v on SVM and logistic regression
 ```
-python w2v_main.py (w2v config file) (google w2v pretrain model) (training data) (testing data)
+python w2v_main.py (w2v_config_file) (google_w2v_pretrain_model) (traindata) (test_data)
 ```
 
 ### CNN
 To train the CNN with bow of words use the following cmd
 ```
-python cnn_main.py bow (bow config file) (training data) (testing data)
+python cnn_main.py bow (bow_config_file) (traindata) (test_data)
 ```
 To train the CNN with word2vec use the following cmd
 ```
-python cnn_main.py w2v (w2v config file) (training data) (valid data) (google w2v pretrain model)
+python cnn_main.py w2v (w2v_config_file) (traindata) (test_data) (google_w2v_pretrain_model)
 ```
