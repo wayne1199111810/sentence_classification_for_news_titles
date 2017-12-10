@@ -1,11 +1,13 @@
-#Sentence Classification for News Titles
-SUMMARY: Dataset of references (urls) to news web pages
+# Sentence Classification for News Titles
 
 ### Table of Content
+**[Project Description](#project-description)**<br>
 **[Dataset](#dataset)**<br>
 **[Pre-request](#dependency)**<br>
 **[Training Example](#implementation)**<br>
 
+## Project Description
+Classifying the semantic content is one of the critical problems in natural language processing. There are many cases where only a small number of words are provided to interpret the meaning or intent such as keyword searches. However, the performance of short text classification is limited due to shortness of sentences, which causes sparse vector representations if we use word occurrence to represent sentences, and lack of context. On the other hand, news titles, though consisting of short sentences, provide rich information of the semantic content in a concise way. Because of this property, we believe that news title classification will be a good start point for our sentence classification task.
 
 ## Dataset
 ### [News Aggregator Data Set](https://archive.ics.uci.edu/ml/datasets/News+Aggregator)
@@ -19,15 +21,14 @@ TagMyNews Datasets is a collection of datasets of short text fragments which are
 
 ## Dependency
 ### Download w2v from google
+Download [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
 Reference to [Google word2vec](https://code.google.com/archive/p/word2vec/)
-[GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
 
 ### Install Keras
-reference to [Keras](https://keras.io/)
+Reference to [Keras](https://keras.io/)
 ```
 pip install keras
 ```
-
 
 ## Implementation
 ### Machine Learning Model on Different Sentence Representation
