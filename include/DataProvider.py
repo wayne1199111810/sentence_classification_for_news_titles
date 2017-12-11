@@ -75,6 +75,7 @@ class BowDataProvider(object):
         self.category = category
         self.for_cnn = for_cnn
         self.vectorizer = HashingVectorizer(stop_words='english', n_features=n_features)
+        # self.vectorizer = HashingVectorizer(stop_words='english')
         self.encoder = OneHotEncoder(list(category))
 
     def getData(self, filename):

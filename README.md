@@ -24,6 +24,7 @@ TagMyNews Datasets is a collection of datasets of short text fragments which are
 The word embedding [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit) from [Google word2vec](https://code.google.com/archive/p/word2vec/). The [Keras](https://keras.io/) Deep Learning library and most recent [Theano](http://deeplearning.net/software/theano/install.html#install) backend should be installed. You can use pip for that.
 
 ## Implementation
+We provide example cmd on in [run.sh](https://github.com/wayne1199111810/sentence_classification_for_news_titles/blob/master/run.sh)
 ### Machine Learning Model on Different Sentence Representation
 Training count of words on SVM and logistic regression
 ```
