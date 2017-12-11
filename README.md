@@ -15,7 +15,7 @@ Classifying the semantic content is one of the critical problems in natural lang
 Reference to news web pages collected from an online aggregator in the period from March 10 to August 10 of 2014. The resources are grouped into clusters that represent pages discussing the same news story. The dataset includes also references to web pages that point (has a link to) one of the news page in the collection.
 
 ### [Event Registry](http://eventregistry.org/documentation?tab=searchArticles)
-It is collected from Event Registry API, in which contains much more up-to-date news. The downside is that they are using their own scraper or classifier, which may introduce more noise to the data compared to manually labeling. some example code is in [news_api]
+It is collected from Event Registry API, in which contains much more up-to-date news. The downside is that they are using their own scraper or classifier, which may introduce more noise to the data compared to manually labeling. some example code is in [news_api](https://github.com/wayne1199111810/sentence_classification_for_news_titles/tree/master/include/news_api)
 
 ### [Tag My News](http://acube.di.unipi.it/tmn-dataset/)
 TagMyNews Datasets is a collection of datasets of short text fragments which are used for topic-based text classifier. It is used in several other papers and is more difficult than the News Aggregator Dataset considering the scarcity of data and more categories.
