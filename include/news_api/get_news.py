@@ -1,7 +1,7 @@
-from eventregistry import *
-import json
 # crawling the data from event registry API
 
+from eventregistry import *
+import json
 import datetime
 import os
 
