@@ -1,21 +1,24 @@
 """
 convert json to csv file with highest score as the main category
 """
-
 import json
 import csv
 import os
 
+
 data_dir = "download_data/"
 output_dir = "processed_data/"
+
 
 def get_highest_category(record):
     categories = record['categories']
     highest_category = max(categories, key=lambda x: x['wgt'])
     return parse_main_category(highest_category['uri']), record['title'].strip('\n')
 
+
 def parse_main_category(category_uri):
     return category_uri.split('/')[1]
+
 
 if __name__ == "__main__":
     file_names = os.listdir(data_dir)
